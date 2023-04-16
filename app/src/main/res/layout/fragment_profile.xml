@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.Profile.ProfileFragment"
+    android:orientation="vertical"
+    android:padding="40dp">
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_person_add"
+        android:background="@drawable/raund_img"
+        android:contentDescription="@string/todo" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:background="@drawable/raund_edit_text"
+        android:layout_marginTop="18dp"
+        android:paddingStart="12dp"
+        android:hint="@string/add"
+        tools:ignore="RtlSymmetry"
+        android:inputType="text"
+        android:importantForAutofill="no" />
+
+</LinearLayout>
