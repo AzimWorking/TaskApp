@@ -25,11 +25,16 @@
     <fragment
         android:id="@+id/taskFragment"
         android:name="com.agn.taskapp.ui.task.TaskFragment"
-        android:label="Task"
+        android:label="@string/task"
         tools:layout="@layout/fragment_task" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.agn.taskapp.ui.Profile.ProfileFragment"
-        android:label="Profile"
+        android:label="@string/profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/onBoardingFragment"
+        android:name="com.agn.taskapp.ui.onBoard.onBoardingFragment"
+        android:label="fragment_on_boarding"
+        tools:layout="@layout/fragment_on_boarding" />
 </navigation>
