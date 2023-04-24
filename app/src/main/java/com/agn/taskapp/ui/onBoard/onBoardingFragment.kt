@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.agn.taskapp.R
+import com.agn.taskapp.data.remote.Pref
 import com.agn.taskapp.databinding.FragmentOnBoardingBinding
 import com.agn.taskapp.model.OnBoard
 import com.agn.taskapp.ui.onBoard.adapter.OnBoardingAdapter
@@ -15,6 +16,7 @@ import com.agn.taskapp.utils.showToast
 class onBoardingFragment : Fragment() {
 
     private lateinit var binding: FragmentOnBoardingBinding
+    private lateinit var pref: Pref
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +28,7 @@ class onBoardingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        pref = Pref(requireContext())
         val adapter = OnBoardingAdapter(this::onClick)
         binding.viewPager.adapter = adapter
 
@@ -36,6 +39,7 @@ class onBoardingFragment : Fragment() {
 
     fun onClick(onBoard: OnBoard) {
         findNavController().navigateUp()
+        pref.saveUserSeen()
 
     }
 }

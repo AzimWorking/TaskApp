@@ -10,7 +10,7 @@
     <string name="description">Description</string>
     <string name="title">Title</string>
     <string name="profile">Profile</string>
-    <string name="add">Добавить</string>
+    <string name="add">Введите имя</string>
     <string name="task">Task</string>
     <string name="get_started">get started</string>
 </resources>
