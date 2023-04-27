@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
+import com.agn.taskapp.App
 import com.agn.taskapp.model.Task
 import com.agn.taskapp.databinding.FragmentTaskBinding
 
@@ -25,17 +26,22 @@ class TaskFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btnSave.setOnClickListener{
-            val data = Task(
-                title = binding.etTitle.text.toString(),
-                desc = binding.etDesc.text.toString(),
-            )
-            setFragmentResult(TASK_REQUEST, bundleOf(TASK_KEY to data))
-            findNavController().navigateUp()
+        binding.btnSave.setOnClickListener {
+            save()
         }
     }
 
-    companion object{
+    private fun save() {
+        val data = Task(
+            title = binding.etTitle.text.toString(),
+            desc = binding.etDesc.text.toString(),
+        )
+        App.db.taskDao().insert(data)
+        findNavController().navigateUp()
+
+    }
+
+    companion object {
         const val TASK_REQUEST = "taskRequest"
         const val TASK_KEY = "taskKey"
     }

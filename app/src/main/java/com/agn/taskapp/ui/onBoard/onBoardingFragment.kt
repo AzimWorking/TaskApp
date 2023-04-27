@@ -6,12 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.agn.taskapp.R
-import com.agn.taskapp.data.remote.Pref
+import com.agn.taskapp.data.local.Pref
 import com.agn.taskapp.databinding.FragmentOnBoardingBinding
 import com.agn.taskapp.model.OnBoard
 import com.agn.taskapp.ui.onBoard.adapter.OnBoardingAdapter
-import com.agn.taskapp.utils.showToast
 
 class onBoardingFragment : Fragment() {
 

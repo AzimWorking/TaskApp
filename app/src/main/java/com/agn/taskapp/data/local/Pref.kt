@@ -1,4 +1,4 @@
-package com.agn.taskapp.data.remote
+package com.agn.taskapp.data.local
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
@@ -20,6 +20,8 @@ class Pref(private val context: Context) {
     companion object {
         const val TASK_PREF_NAME = "TaskPref"
         const val USER_SEEN_KEY = "user.seen"
+//        const val USER_NAME_KEY = "keyName"
+//        const val SAVE_IMAGE_KEY = "keyImg"
     }
 
     // что бы получать и сохранить в самом приложении то есть это internal storage
@@ -38,7 +40,4 @@ class Pref(private val context: Context) {
     fun getImg(): String {
         return pref.getString("keyImg", "").toString()
     }
-
-
-
 }

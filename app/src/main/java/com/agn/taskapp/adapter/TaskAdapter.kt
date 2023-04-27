@@ -6,12 +6,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.agn.taskapp.databinding.ItemTaskBinding
 import com.agn.taskapp.model.Task
 
-class TaskAdapter : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
+class TaskAdapter(private val onLongClick: (Task) -> Unit) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     private val data = arrayListOf<Task>()
 
-    fun addTask(task: Task) {
-        data.add(0,task)
+//    fun addTask(task: Task) {
+//        data.add(0, task)
+//        notifyDataSetChanged()
+//    }
+
+    fun addTasks(task: List<Task>) {
+        data.clear()
+        // не будлировались данные
+        // старые данные удаляем
+        data.addAll(task) // не корекно
+            data.sortByDescending { it.id }
+            // добавили новые данные
         notifyDataSetChanged()
     }
 
@@ -26,18 +36,23 @@ class TaskAdapter : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        holder.bind(data.get(position))
+        holder.bind(data[position])
     }
 
     override fun getItemCount(): Int {
         return data.size
     }
 
-    class TaskViewHolder(private val binding: ItemTaskBinding) :
+    inner class TaskViewHolder(private val binding: ItemTaskBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(task: Task) {
             binding.tvTitle.text = task.title
             binding.tvDesc.text = task.desc
+
+            itemView.setOnLongClickListener {
+                onLongClick(task)
+                false
+            }
         }
     }
 }

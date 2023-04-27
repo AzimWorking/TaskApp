@@ -10,8 +10,7 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.addTextChangedListener
-import com.agn.taskapp.R
-import com.agn.taskapp.data.remote.Pref
+import com.agn.taskapp.data.local.Pref
 import com.agn.taskapp.databinding.FragmentProfileBinding
 import com.agn.taskapp.utils.loadImage
 
