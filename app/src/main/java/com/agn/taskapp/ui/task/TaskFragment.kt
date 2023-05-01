@@ -1,14 +1,12 @@
 package com.agn.taskapp.ui.task
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.os.bundleOf
-import androidx.fragment.app.setFragmentResult
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.agn.taskapp.App
 import com.agn.taskapp.model.Task
@@ -29,6 +27,7 @@ class TaskFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
@@ -42,45 +41,28 @@ class TaskFragment : Fragment() {
         } else {
             binding.btnSave.text = "Save"
         }
-
-//        binding.btnSave.setOnClickListener {
-//                val title = binding.etTitle.text.toString()
-//                val desc = binding.etDesc.text.toString()
-//                if (title.isNotEmpty() || desc.isNotEmpty()) {
-//                    task = Task(id, title, desc)
-//                    App.db.taskDao().update(task!!)
-//                    findNavController().navigateUp()
-//                } else {
-//                    Toast.makeText(requireContext(), "Title and desc can not by empty", Toast.LENGTH_SHORT).show()
-//                }
-//        }
-
+            // update замена item
         binding.btnSave.setOnClickListener {
             val data = Task(
-                title = binding.etTitle.text.toString(),
-                desc = binding.etDesc.text.toString(),
+                title = binding.etTitle.text.toString(), desc = binding.etDesc.text.toString(),
             )
 
-            if (data.title != null || data.desc != null) {
-                task = Task(id, data.title, data.desc)
-                App.db.taskDao().update(data)
-                App.db.taskDao().insert(data)
-                findNavController().navigateUp()
-            } else {
-                Toast.makeText(requireContext(), "Title and desc can not by empty", Toast.LENGTH_SHORT).show()
+            if (data.title!!.isBlank() || data.desc!!.isBlank()) {
+                Toast.makeText(
+                    requireContext(),
+                    "Title and desc cannot be empty",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
             }
+
+            task = task?.copy(title = data.title, desc = data.desc) ?: Task(
+                title = data.title,
+                desc = data.desc
+            )
+            App.db.taskDao().update(task!!)
+            findNavController().navigateUp()
         }
-    }
-
-
-
-    private fun save() {
-//        val data = Task(
-//            title = binding.etTitle.text.toString(),
-//            desc = binding.etDesc.text.toString(),
-//        )
-//        App.db.taskDao().insert(data)
-//        findNavController().navigateUp()
     }
 
     companion object {

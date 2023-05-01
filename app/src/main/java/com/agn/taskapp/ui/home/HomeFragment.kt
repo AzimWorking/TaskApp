@@ -72,6 +72,5 @@ class HomeFragment : Fragment() {
     private fun setData() {
         val list = App.db.taskDao().getAll()
         adapter.addTasks(list)
-
     }
 }

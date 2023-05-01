@@ -48,7 +48,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:text="@string/get_started"/>
 
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

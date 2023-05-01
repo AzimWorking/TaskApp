@@ -2,12 +2,8 @@ package com.agn.taskapp.ui.home.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View.OnClickListener
 import android.view.ViewGroup
-import android.widget.AdapterView.OnItemClickListener
-import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
-import com.agn.taskapp.R
 import com.agn.taskapp.databinding.ItemTaskBinding
 import com.agn.taskapp.model.Task
 
@@ -18,9 +14,10 @@ class TaskAdapter(
 
     private val data = arrayListOf<Task>()
 
-//    fun addTask(task: Task) {
+//        fun addTask(task: Task) {
 //        data.add(0, task)
 //        notifyDataSetChanged()
+    // не удолять
 //    }
     @SuppressLint("NotifyDataSetChanged")
     fun addTasks(task: List<Task>) {
@@ -66,8 +63,6 @@ class TaskAdapter(
             itemView.setOnClickListener {
                 onClick(task)
             }
-
-
         }
     }
 }
