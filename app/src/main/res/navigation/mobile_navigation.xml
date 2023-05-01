@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.agn.taskapp.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_taskFragment2"
+            app:destination="@id/taskFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -26,7 +30,14 @@
         android:id="@+id/taskFragment"
         android:name="com.agn.taskapp.ui.task.TaskFragment"
         android:label="@string/task"
-        tools:layout="@layout/fragment_task" />
+        tools:layout="@layout/fragment_task" >
+        <argument
+            android:name="task"
+            android:defaultValue="@null"
+            app:nullable="true"
+            app:argType="com.agn.taskapp.model.Task"/>
+    </fragment>
+
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.agn.taskapp.ui.Profile.ProfileFragment"

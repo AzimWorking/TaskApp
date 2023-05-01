@@ -38,6 +38,5 @@ class onBoardingFragment : Fragment() {
     fun onClick(onBoard: OnBoard) {
         findNavController().navigateUp()
         pref.saveUserSeen()
-
     }
 }

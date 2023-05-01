@@ -39,9 +39,9 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         pref = Pref(requireContext())
-        binding.profileImage.loadImage(pref.getImg())
-
         saveName()
+
+        binding.profileImage.loadImage(pref.getImg())
         binding.profileImage.setOnClickListener {
             val  intent = Intent()
             // что б показывал токо картинки
@@ -56,7 +56,5 @@ class ProfileFragment : Fragment() {
         binding.etName.addTextChangedListener {
             pref.saveName(binding.etName.text.toString())
         }
-
-
     }
 }

@@ -6,6 +6,7 @@ import com.agn.taskapp.model.Task
 @Dao
 interface TaskDao {
 
+   // "SELECT * FROM task ORDER BY title ASC" о
     @Query("SELECT * FROM task")
     fun getAll(): List<Task>
 

@@ -1,12 +1,20 @@
-package com.agn.taskapp.adapter
+package com.agn.taskapp.ui.home.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.widget.AdapterView.OnItemClickListener
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
+import com.agn.taskapp.R
 import com.agn.taskapp.databinding.ItemTaskBinding
 import com.agn.taskapp.model.Task
 
-class TaskAdapter(private val onLongClick: (Task) -> Unit) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
+class TaskAdapter(
+    private val onLongClick: (Task) -> Unit,
+    private val onClick: (Task) -> Unit
+) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     private val data = arrayListOf<Task>()
 
@@ -14,14 +22,14 @@ class TaskAdapter(private val onLongClick: (Task) -> Unit) : RecyclerView.Adapte
 //        data.add(0, task)
 //        notifyDataSetChanged()
 //    }
-
+    @SuppressLint("NotifyDataSetChanged")
     fun addTasks(task: List<Task>) {
         data.clear()
         // не будлировались данные
         // старые данные удаляем
         data.addAll(task) // не корекно
-            data.sortByDescending { it.id }
-            // добавили новые данные
+        data.sortByDescending { it.id }  // отсортировали Item то есть поставили на первое место
+        // добавили новые данные
         notifyDataSetChanged()
     }
 
@@ -49,10 +57,17 @@ class TaskAdapter(private val onLongClick: (Task) -> Unit) : RecyclerView.Adapte
             binding.tvTitle.text = task.title
             binding.tvDesc.text = task.desc
 
+            // отсюда обрабытваем длиннный клик на ITEM
             itemView.setOnLongClickListener {
                 onLongClick(task)
                 false
             }
+
+            itemView.setOnClickListener {
+                onClick(task)
+            }
+
+
         }
     }
 }
