@@ -1,7 +1,6 @@
 package com.agn.taskapp.ui.task
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -40,12 +39,12 @@ class TaskFragment : Fragment() {
             binding.btnSave.text = "Save"
         }
 
+        // update and insert
         binding.btnSave.setOnClickListener {
             val data = Task(
                 title = binding.etTitle.text.toString(),
                 desc = binding.etDesc.text.toString(),
             )
-
             if (data.title!!.isBlank() || data.desc!!.isBlank()) {
                 Toast.makeText(
                     requireContext(),
@@ -63,7 +62,6 @@ class TaskFragment : Fragment() {
                 task = Task(title = data.title, desc = data.desc)
                 App.db.taskDao().insert(task!!)
             }
-
             findNavController().navigateUp()
         }
     }
