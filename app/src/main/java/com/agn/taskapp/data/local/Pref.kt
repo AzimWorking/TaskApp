@@ -9,7 +9,7 @@ class Pref(private val context: Context) {
     private val pref: SharedPreferences = context.getSharedPreferences(TASK_PREF_NAME, MODE_PRIVATE)
 
     fun isUserSeen(): Boolean {
-        return pref.getBoolean(USER_SEEN_KEY, false)
+        return pref.getBoolean(USER_SEEN_KEY,false)
     }
 
     fun saveUserSeen() {

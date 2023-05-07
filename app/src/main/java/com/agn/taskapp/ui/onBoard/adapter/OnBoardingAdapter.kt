@@ -10,7 +10,8 @@ import com.agn.taskapp.utils.loadImage
 
 // передача методов example onClick
 // unit не возвращаемый метод
-class OnBoardingAdapter(private val onClick: (OnBoard) -> Unit) : Adapter<OnBoardingAdapter.OnBoardingViewHolder>() {
+class OnBoardingAdapter(private val onClick: (OnBoard) -> Unit) :
+    Adapter<OnBoardingAdapter.OnBoardingViewHolder>() {
 
    private val data = arrayListOf(
         OnBoard(
@@ -50,6 +51,7 @@ class OnBoardingAdapter(private val onClick: (OnBoard) -> Unit) : Adapter<OnBoar
 
   inner class OnBoardingViewHolder(private val binding: ItemOnboardingBinding) :
         ViewHolder(binding.root) {
+
         fun bind(onBoard: OnBoard) {
             binding.btnStart.setOnClickListener {
                 onClick(onBoard)

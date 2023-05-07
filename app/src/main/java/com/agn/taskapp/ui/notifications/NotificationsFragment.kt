@@ -1,4 +1,4 @@
-package com.agn.taskapp.notifications
+package com.agn.taskapp.ui.notifications
 
 import android.os.Bundle
 import android.view.LayoutInflater

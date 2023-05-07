@@ -13,4 +13,10 @@
     <string name="add">Введите имя</string>
     <string name="task">Task</string>
     <string name="get_started">get started</string>
+    <string name="phone">Phone</string>
+    <string name="google">Google</string>
+    <string name="number">Number</string>
+    <string name="verify">verify</string>
+    <string name="code">code</string>
+    <string name="accept">Accept</string>
 </resources>
