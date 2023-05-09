@@ -13,11 +13,14 @@ import androidx.core.widget.addTextChangedListener
 import com.agn.taskapp.data.local.Pref
 import com.agn.taskapp.databinding.FragmentProfileBinding
 import com.agn.taskapp.utils.loadImage
+import com.agn.taskapp.utils.showToast
+import com.google.firebase.auth.FirebaseAuth
 
 class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
     private lateinit var pref: Pref
+    private lateinit var auth: FirebaseAuth
 
     private val launcher =
         // ждать результат когда входим в файловую систему
@@ -38,6 +41,7 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        auth = FirebaseAuth.getInstance()
         pref = Pref(requireContext())
         saveName()
 
@@ -48,6 +52,13 @@ class ProfileFragment : Fragment() {
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT
             launcher.launch(intent)
+        }
+
+        binding.btnDeleteAccount.setOnClickListener {
+            var lastUser:String? = FirebaseAuth.getInstance().currentUser.toString()
+            FirebaseAuth.getInstance().signOut()
+            showToast("$lastUser signed out")
+
         }
     }
 

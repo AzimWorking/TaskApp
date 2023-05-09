@@ -1,6 +1,7 @@
 package com.agn.taskapp
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -20,42 +21,40 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        auth = FirebaseAuth.getInstance()
-
         pref = Pref(this)
         val navView: BottomNavigationView = binding.navView
+        auth = FirebaseAuth.getInstance()
+
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
 
         if (!pref.isUserSeen())
             navController.navigate(R.id.onBoardingFragment)
 
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home,
-                R.id.navigation_dashboard,
-                R.id.navigation_notifications,
-                R.id.taskFragment,
-                R.id.profileFragment
-            )
+        if (auth.currentUser?.uid== null) {
+            navController.navigate(R.id.authFragment)
+        }
+
+        val bottomNavFragments = setOf(
+            R.id.navigation_home,
+            R.id.navigation_dashboard,
+            R.id.navigation_notifications,
+            R.id.profileFragment
         )
 
-//        if (auth.currentUser == null) {
-//            navController.navigate(R.id.authFragment)
-//        }
+        val appBarConfiguration = AppBarConfiguration(bottomNavFragments)
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            if (destination.id == R.id.onBoardingFragment) {
-                navView.isVisible = false
-                supportActionBar?.hide()
+            if (bottomNavFragments.contains(destination.id)) {
+                navView.isVisible = true
+                supportActionBar?.show()
             } else {
                 navView.isVisible = true
                 supportActionBar?.show()
             }
         }
-
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
