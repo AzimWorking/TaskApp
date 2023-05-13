@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.agn.taskapp.databinding.FragmentDashboardBinding
 import com.agn.taskapp.utils.showToast
 import com.google.android.gms.tasks.Task
+import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -35,13 +36,14 @@ class DashboardFragment : Fragment() {
         binding.btnSave.setOnClickListener {
             save()
         }
-
+    }
         private fun save() {
-            val value = Task(
+            val value = com.agn.taskapp.model.Task(
                 title = binding.etTitle.text.toString(),
                 desc = binding.etDesc.text.toString()
             )
-            db.collection(FirebaseAuth.getInstance().currentUser?.uid.toString()).document().set(value)
+            db.collection(FirebaseAuth.getInstance().currentUser?.uid.toString()).document()
+                .set(value)
                 .addOnSuccessListener {
                     showToast("Данные успешно сохранены!")
                 }.addOnFailureListener {
@@ -51,8 +53,8 @@ class DashboardFragment : Fragment() {
 
         }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        override fun onDestroyView() {
+            super.onDestroyView()
+            _binding = null
+        }
     }
-}

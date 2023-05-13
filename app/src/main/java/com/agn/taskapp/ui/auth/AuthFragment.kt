@@ -98,7 +98,7 @@ class AuthFragment : Fragment() {
                                 }
                             })
                 }
-            } catch (e: ApiException) {
+            } catch (_: ApiException) {
             }
         }
     }

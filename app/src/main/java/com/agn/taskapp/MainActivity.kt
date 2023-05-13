@@ -1,7 +1,6 @@
 package com.agn.taskapp
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -51,8 +50,8 @@ class MainActivity : AppCompatActivity() {
                 navView.isVisible = true
                 supportActionBar?.show()
             } else {
-                navView.isVisible = true
-                supportActionBar?.show()
+                navView.isVisible = false
+                supportActionBar?.hide()
             }
         }
 
