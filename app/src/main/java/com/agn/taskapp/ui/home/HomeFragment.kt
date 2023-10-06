@@ -40,6 +40,7 @@ class HomeFragment : Fragment() {
         binding.recicleView.adapter = adapter
         binding.fab.setOnClickListener {
             findNavController().navigate(R.id.taskFragment)
+
         }
     }
 
@@ -64,6 +65,7 @@ class HomeFragment : Fragment() {
         })
         alertDialog.create().show()
     }
+
 
     private fun setData() {
         val list = App.db.taskDao().getAll()

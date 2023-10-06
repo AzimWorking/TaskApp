@@ -34,9 +34,9 @@ class TaskFragment : Fragment() {
         if (task != null) {
             binding.etTitle.setText(task?.title)
             binding.etDesc.setText(task?.desc)
-            binding.btnSave.text = "Update"
+            binding.btnSave.text = "Обновавить"
         } else {
-            binding.btnSave.text = "Save"
+            binding.btnSave.text = "Сохранить"
         }
 
         // update and insert
@@ -48,7 +48,7 @@ class TaskFragment : Fragment() {
             if (data.title!!.isBlank() || data.desc!!.isBlank()) {
                 Toast.makeText(
                     requireContext(),
-                    "Title and desc cannot be empty",
+                    "Поля не могут быть пустыми",
                     Toast.LENGTH_SHORT
                 ).show()
                 return@setOnClickListener
@@ -64,6 +64,7 @@ class TaskFragment : Fragment() {
             }
             findNavController().navigateUp()
         }
+
     }
 
     companion object {

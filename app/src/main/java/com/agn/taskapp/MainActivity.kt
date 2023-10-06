@@ -1,6 +1,8 @@
 package com.agn.taskapp
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -11,6 +13,12 @@ import androidx.navigation.ui.setupWithNavController
 import com.agn.taskapp.data.local.Pref
 import com.agn.taskapp.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,11 +26,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var pref: Pref
     private lateinit var auth: FirebaseAuth
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
         pref = Pref(this)
         val navView: BottomNavigationView = binding.navView
         auth = FirebaseAuth.getInstance()
@@ -32,30 +43,52 @@ class MainActivity : AppCompatActivity() {
         if (!pref.isUserSeen())
             navController.navigate(R.id.onBoardingFragment)
 
-        if (auth.currentUser?.uid== null) {
+        if (auth.currentUser?.uid == null) {
             navController.navigate(R.id.authFragment)
         }
 
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_home
+            )
+        )
         val bottomNavFragments = setOf(
             R.id.navigation_home,
-            R.id.navigation_dashboard,
-            R.id.navigation_notifications,
             R.id.profileFragment
         )
 
-        val appBarConfiguration = AppBarConfiguration(bottomNavFragments)
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            if (bottomNavFragments.contains(destination.id)) {
-                navView.isVisible = true
-                supportActionBar?.show()
+            navView.isVisible = bottomNavFragments.contains(destination.id)
+            if (destination.id == destination.id) {
+                supportActionBar?.hide()
             } else {
-                navView.isVisible = false
                 supportActionBar?.hide()
             }
         }
+    }
 
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        fun realtimeData() {
+
+            val database = Firebase.database
+            val myRef = database.getReference("message")
+
+            myRef.setValue("Hello, World!")
+            myRef.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    // This method is called once with the initial value and again
+                    // whenever data at this location is updated.
+                    val value = dataSnapshot.getValue<String>()
+                    Log.d(TAG, "Value is: $value")
+                }
+
+
+                override fun onCancelled(error: DatabaseError) {
+                    // Failed to read value
+                    Log.w(TAG, "Failed to read value.", error.toException())
+                }
+            })
     }
 }

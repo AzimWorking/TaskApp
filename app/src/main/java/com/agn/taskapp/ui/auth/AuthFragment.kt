@@ -44,7 +44,7 @@ class AuthFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         auth = FirebaseAuth.getInstance()
-        binding.btnPhone.setOnClickListener {
+        binding.loginButton.setOnClickListener {
             findNavController().navigate(R.id.verifyNumberFragment)
         }
         oneTapClient = Identity.getSignInClient(requireActivity())
@@ -59,9 +59,6 @@ class AuthFragment : Fragment() {
                     .build()
             )
             .build()
-        binding.btnGoogle.setOnClickListener {
-            signingGoogle()
-        }
     }
 
     private fun signingGoogle() {

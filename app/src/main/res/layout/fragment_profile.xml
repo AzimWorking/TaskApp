@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.Profile.ProfileFragment"
+    android:background="@drawable/profileback"
     android:orientation="vertical"
     android:padding="40dp">
 
@@ -21,7 +22,7 @@
         android:id="@+id/et_name"
         android:layout_width="match_parent"
         android:layout_height="46dp"
-        android:background="@drawable/raund_edit_text"
+        android:background="@drawable/raund_edit_text2"
         android:layout_marginTop="18dp"
         android:paddingStart="12dp"
         android:hint="@string/add"
@@ -35,6 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:src="@drawable/ic_delete_account"
+        android:background="@drawable/raund_edit_text2"
         android:backgroundTint="@color/blue"
         android:contentDescription="@string/todo"
         android:layout_gravity="center"/>

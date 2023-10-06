@@ -30,13 +30,13 @@ class AcceptCodeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val verId = arguments?.getString("verId")
         auth = FirebaseAuth.getInstance()
-        binding.btnAccept.setOnClickListener {
+        binding.loginNextBtn.setOnClickListener {
             acceptCode(verId)
         }
     }
 
     private fun acceptCode(verId: String?) {
-        val code = binding.etCode.text.toString()
+        val code = binding.loginOtp.text.toString()
         val credential = PhoneAuthProvider.getCredential(verId!!, code)
         auth.signInWithCredential(credential).addOnSuccessListener {
             findNavController().navigate(R.id.navigation_home)

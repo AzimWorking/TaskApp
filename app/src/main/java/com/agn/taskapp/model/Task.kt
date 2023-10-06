@@ -10,7 +10,8 @@ data class Task(
     // autoGenerate = true если null
     val id: Int? = null,
     var title: String? = null,
-    var desc: String? = null
-) : Serializable
+    var desc: String? = null,
+
+    ) : Serializable
 
 

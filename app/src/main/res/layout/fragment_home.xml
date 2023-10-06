@@ -6,11 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
+    <LinearLayout
+        android:layout_width="395dp"
+        android:layout_height="162dp"
+        android:layout_weight="20"
+        android:background="@drawable/raund_edit_text"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/recicleView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recicleView2"
+            android:layout_width="395dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="40dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    </LinearLayout>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recicleView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        android:layout_width="415dp"
+        android:background="@drawable/back_home"
+        android:layout_height="523dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.995" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -19,7 +46,9 @@
         android:layout_margin="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="#B2873191"
         android:src="@drawable/ic_add"
+
         android:contentDescription="@string/todo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,7 +14,7 @@ class TaskAdapter(
 
     private val data = arrayListOf<Task>()
 
-//        fun addTask(task: Task) {
+//        fun addTask(task: Task) {  `
 //        data.add(0, task)
 //        notifyDataSetChanged()
     // не удолять
@@ -59,7 +59,6 @@ class TaskAdapter(
                 onLongClick(task)
                 false
             }
-
             itemView.setOnClickListener {
                 onClick(task)
             }
